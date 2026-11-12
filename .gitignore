@@ -1,0 +1,8 @@
+# Keep private records and backups out of source control.
+*.sqlite3
+*.db
+*.sqlite3-wal
+*.sqlite3-shm
+*.backup.json
+.env
+.env.*

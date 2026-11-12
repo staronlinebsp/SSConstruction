@@ -1,0 +1,2311 @@
+<!DOCTYPE html>
+<html lang="hi" class="boot-wait">
+<head>
+  <meta charset="UTF-8" /><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co; base-uri 'none'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SS Construction | Invoice, Contract, Employee &amp; Salary Studio</title>
+  <style>
+    :root {
+      --navy: #12345a;
+      --blue: #1769aa;
+      --orange: #f28c28;
+      --bg: #f2f5f9;
+      --ink: #17212b;
+      --muted: #64748b;
+      --line: #d7dee8;
+      --danger: #dc2626;
+      --success: #059669;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      font-family: Arial, "Noto Sans Devanagari", sans-serif;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ==================== TOP HEADER ==================== */
+    .top {
+      background: linear-gradient(120deg, #102b4d, #1769aa);
+      color: white;
+      padding: 18px max(20px, calc((100% - 1280px) / 2));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .top h1 {
+      margin: 0;
+      font-size: 23px;
+      letter-spacing: 0.4px;
+    }
+
+    .top p {
+      margin: 4px 0 0;
+      color: #dcecff;
+      font-size: 13px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .top-btn {
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 7px;
+      padding: 8px 12px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s;
+    }
+
+    .top-btn:hover {
+      background: rgba(255, 255, 255, 0.24);
+    }
+
+    .top-btn.orange-btn {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: #fff;
+    }
+
+    .top-btn.orange-btn:hover {
+      background: #e07b18;
+    }
+
+    .pill-badge {
+      background: rgba(255, 255, 255, 0.25);
+      color: #fff;
+      font-size: 11px;
+      padding: 1px 6px;
+      border-radius: 999px;
+    }
+
+    /* ==================== MAIN APP NAVIGATION TABS ==================== */
+    .main-nav-bar {
+      background: #0d223c;
+      border-bottom: 1px solid #1e3a5f;
+      padding: 0 max(20px, calc((100% - 1280px) / 2));
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+    }
+
+    .main-nav-btn {
+      background: transparent;
+      color: #cbd5e1;
+      border: 0;
+      border-bottom: 3px solid transparent;
+      border-radius: 0;
+      padding: 12px 16px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .main-nav-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .main-nav-btn.active {
+      color: #ffffff;
+      border-bottom-color: var(--orange);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .app-view {
+      display: none;
+    }
+
+    .app-view.active {
+      display: block;
+    }
+
+    /* ==================== MAIN WORKSPACE ==================== */
+    .wrap {
+      max-width: 1280px;
+      margin: 22px auto;
+      padding: 0 16px 32px;
+      display: grid;
+      grid-template-columns: 440px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .panel {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 4px 18px #193b5b0b;
+      height: max-content;
+    }
+
+    /* ==================== LEFT PANEL TABS ==================== */
+    .panel-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #e9f1f9;
+      padding: 4px;
+      border-radius: 9px;
+      margin-bottom: 16px;
+      gap: 4px;
+    }
+
+    .panel-tab-btn {
+      border: 0;
+      background: transparent;
+      color: var(--navy);
+      padding: 9px 10px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .panel-tab-btn:hover {
+      background: rgba(255, 255, 255, 0.55);
+    }
+
+    .panel-tab-btn.active {
+      background: #ffffff;
+      color: var(--blue);
+      box-shadow: 0 2px 6px rgba(18, 52, 90, 0.12);
+    }
+
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.active {
+      display: block;
+    }
+
+    .panel h2 {
+      font-size: 16px;
+      margin: 0 0 12px;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .panel-section {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+    }
+
+    .panel-section:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .sec-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      gap: 8px;
+    }
+
+    .sec-head h3 {
+      margin: 0;
+      font-size: 13.5px;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #42536a;
+      margin: 10px 0 4px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 9px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 13.5px;
+      font-family: inherit;
+      background: #fff;
+      color: #17212b;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 2px solid #b9d9f7;
+      border-color: #3987c9;
+    }
+
+    textarea {
+      resize: vertical;
+      line-height: 1.4;
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .grid3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .grid4 {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 0.7fr 1fr;
+      gap: 8px;
+    }
+
+    .input-with-btn {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-mini {
+      background: #e9f1f9;
+      color: var(--navy);
+      border: 1px solid #bcd4ec;
+      border-radius: 7px;
+      padding: 0 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-mini:hover {
+      background: #d6e6f7;
+    }
+
+    .btn-chip {
+      background: #e9f1f9;
+      color: var(--blue);
+      border: 1px solid #bcd4ec;
+      border-radius: 6px;
+      padding: 4px 9px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-chip:hover {
+      background: #d8e8f8;
+    }
+
+    .btn-link {
+      background: none;
+      border: 0;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 2px 4px;
+    }
+
+    .btn-link:hover {
+      text-decoration: underline;
+    }
+
+    .quick-period-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .btn-soft {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+      border-radius: 6px;
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-soft:hover {
+      background: #e2e8f0;
+    }
+
+    .contract-meta-strip {
+      margin-top: 8px;
+      padding: 7px 10px;
+      background: #f1f5f9;
+      border-radius: 7px;
+      font-size: 11.5px;
+      color: #334155;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px 12px;
+      line-height: 1.4;
+    }
+
+    /* KM Split Bar */
+    .km-split-bar {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 7px;
+      padding: 8px 10px;
+      margin: 8px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .km-split-info {
+      font-size: 11.5px;
+      color: #1e40af;
+      font-weight: 700;
+    }
+
+    .km-split-controls {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .km-split-controls input {
+      width: 105px;
+      padding: 5px 8px;
+      font-size: 12.5px;
+    }
+
+    /* Line Items & Recoveries in Left Panel */
+    .line-items-list,
+    .recoveries-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .line-item-box {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 9px;
+      background: #f8fafd;
+    }
+
+    .line-item-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .line-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--navy);
+      background: #e2ecf7;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .btn-icon-del {
+      background: none;
+      border: 0;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .btn-icon-del:hover {
+      color: var(--danger);
+      background: #fee2e2;
+    }
+
+    .line-item-metrics {
+      display: grid;
+      grid-template-columns: 0.9fr 0.8fr 0.85fr 1.1fr 1.1fr;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .line-item-metrics label,
+    .recovery-row label {
+      margin: 0 0 2px;
+      font-size: 10.5px;
+    }
+
+    .line-item-metrics input,
+    .recovery-row input,
+    .recovery-row select {
+      padding: 6px 7px;
+      font-size: 12px;
+    }
+
+    .recovery-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1.15fr 0.7fr 0.9fr auto;
+      gap: 6px;
+      align-items: end;
+      background: #f8fafd;
+      padding: 8px;
+      border-radius: 7px;
+      border: 1px solid var(--line);
+    }
+
+    .collapsible-details {
+      border: 1px dashed #cbd5e1;
+      border-radius: 7px;
+      padding: 6px 10px;
+      background: #f8fafc;
+      margin-top: 10px;
+    }
+
+    .collapsible-details summary {
+      font-size: 12px;
+      font-weight: 700;
+      color: #42536a;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .details-body {
+      margin-top: 8px;
+    }
+
+    .check-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+      margin: 0;
+    }
+
+    .check-label input {
+      width: auto;
+      margin: 0;
+    }
+
+    .btns {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 7px;
+      padding: 10px 14px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .primary {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .primary:hover {
+      background: #12568c;
+    }
+
+    .secondary {
+      background: #e9f1f9;
+      color: var(--navy);
+    }
+
+    .secondary:hover {
+      background: #d8e6f3;
+    }
+
+    .orange {
+      background: var(--orange);
+      color: #fff;
+    }
+
+    .orange:hover {
+      background: #df7b18;
+    }
+
+    .btn-danger-outline {
+      background: #fff;
+      color: var(--danger);
+      border: 1px solid #fecaca;
+    }
+
+    .btn-danger-outline:hover {
+      background: #fef2f2;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-top: 10px;
+    }
+
+    /* ==================== PAGE CONTAINERS & CARDS ==================== */
+    .page-container {
+      max-width: 1280px;
+      margin: 22px auto;
+      padding: 0 16px 36px;
+    }
+
+    .page-top-bar {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      box-shadow: 0 4px 18px #193b5b0b;
+    }
+
+    .page-top-bar h2 {
+      margin: 0;
+      font-size: 18px;
+      color: var(--navy);
+    }
+
+    .page-top-bar p {
+      margin: 4px 0 0;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 16px;
+    }
+
+    .entity-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 4px 14px rgba(18, 52, 90, 0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .entity-card:hover {
+      border-color: #93c5fd;
+      box-shadow: 0 6px 20px rgba(23, 105, 170, 0.1);
+    }
+
+    .entity-badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #e9f1f9;
+      color: var(--navy);
+    }
+
+    .badge-tag.green {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .badge-tag.orange {
+      background: #ffedd5;
+      color: #9a3412;
+    }
+
+    .badge-tag.purple {
+      background: #f3e8ff;
+      color: #6b21a8;
+    }
+
+    .assigned-staff-box {
+      background: #f8fafd;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 12px;
+    }
+
+    .staff-chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .staff-chip {
+      background: #ffffff;
+      border: 1px solid #bfdbfe;
+      color: var(--navy);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 11.5px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* ==================== ATTENDANCE GRID & SALARY SLIP ==================== */
+    .att-calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .att-day-cell {
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      padding: 5px 4px;
+      text-align: center;
+      background: #ffffff;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.12s;
+    }
+
+    .att-day-cell:hover {
+      border-color: var(--blue);
+      transform: translateY(-1px);
+    }
+
+    .att-day-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: #475569;
+      display: block;
+    }
+
+    .att-day-dow {
+      font-size: 9.5px;
+      color: #94a3b8;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .att-day-status {
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .att-status-P {
+      background: #dcfce7;
+      color: #166534;
+      border-color: #86efac;
+    }
+    .att-status-A {
+      background: #fee2e2;
+      color: #991b1b;
+      border-color: #fca5a5;
+    }
+    .att-status-HD {
+      background: #fef3c7;
+      color: #92400e;
+      border-color: #fde68a;
+    }
+    .att-status-WO {
+      background: #e0e7ff;
+      color: #1e40af;
+      border-color: #a5b4fc;
+    }
+
+    .att-summary-pills {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .att-stat-box {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 6px;
+      text-align: center;
+    }
+
+    .att-stat-box span {
+      display: block;
+      font-size: 10px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .att-stat-box strong {
+      font-size: 14px;
+      color: var(--navy);
+    }
+
+    .print-att-grid {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 10.5px;
+    }
+
+    .print-att-grid th,
+    .print-att-grid td {
+      border: 1px solid #333;
+      padding: 4px 2px;
+      text-align: center;
+    }
+
+    .print-att-grid th {
+      background: #eef2f6;
+      font-weight: 700;
+    }
+
+    .muster-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 9.5px;
+    }
+
+    .muster-table th,
+    .muster-table td {
+      border: 1px solid #333;
+      padding: 3px 2px;
+      text-align: center;
+    }
+
+    .muster-table th {
+      background: #eef2f6;
+    }
+
+    .emp-assign-checklist {
+      max-height: 170px;
+      overflow-y: auto;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      padding: 8px 10px;
+      background: #f8fafc;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    /* ==================== EXACT INVOICE FORMAT ==================== */
+    .invoice-shell {
+      background: white;
+      padding: 24px;
+      box-shadow: 0 4px 22px #193b5b12;
+      border: 1px solid var(--line);
+      min-width: 0;
+    }
+
+    .invoice {
+      border: 1px solid #222;
+      padding: 22px 24px;
+      min-height: 900px;
+      font-family: Arial, sans-serif;
+      color: #111;
+      font-size: 12px;
+      background: #fff;
+    }
+
+    .inv-title {
+      text-align: center;
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin: 0 0 14px;
+    }
+
+    .company {
+      text-align: center;
+      border-bottom: 2px solid #1b3552;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+
+    .company h2 {
+      font-size: 21px;
+      margin: 0 0 4px;
+      color: #142f50;
+      letter-spacing: 1px;
+    }
+
+    .company div {
+      line-height: 1.45;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    .meta div {
+      line-height: 1.6;
+    }
+
+    .items {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    .items th,
+    .items td {
+      border: 1px solid #333;
+      padding: 7px 6px;
+      vertical-align: top;
+    }
+
+    .items th {
+      background: #eef2f6;
+      text-align: center;
+    }
+
+    .items td:nth-child(1),
+    .items td:nth-child(2),
+    .items td:nth-child(4),
+    .items td:nth-child(5) {
+      text-align: center;
+    }
+
+    .items td:nth-child(3) {
+      white-space: pre-line;
+    }
+
+    .items td:nth-child(6) {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 16px;
+    }
+
+    .bank {
+      line-height: 1.7;
+    }
+
+    .totals {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .totals td {
+      padding: 5px 4px;
+      border-bottom: 1px solid #bbb;
+    }
+
+    .totals td:last-child {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .words {
+      margin-top: 12px;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+
+    .recoveries {
+      margin-top: 12px;
+      line-height: 1.7;
+    }
+
+    .sign {
+      text-align: right;
+      margin-top: 65px;
+      padding-right: 25px;
+      font-weight: bold;
+    }
+
+    /* ==================== MODALS & TOAST ==================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(2px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 100;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.22);
+      width: 100%;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .modal-sm { max-width: 460px; }
+    .modal-md { max-width: 720px; }
+    .modal-lg { max-width: 900px; }
+
+    .modal-header {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      font-size: 16px;
+      color: var(--navy);
+    }
+
+    .modal-close {
+      background: none;
+      border: 0;
+      font-size: 22px;
+      line-height: 1;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 2px 8px;
+    }
+
+    .modal-body {
+      padding: 16px 18px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .modal-footer {
+      padding: 12px 18px;
+      border-top: 1px solid var(--line);
+      background: #f8fafc;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .divider {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 14px 0;
+    }
+
+    .cm-list,
+    .directory-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cm-item-row,
+    .dir-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: #f8fafc;
+    }
+
+    .dir-card {
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .dir-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 3px;
+    }
+
+    .dir-sub {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 12px;
+    }
+
+    .dir-actions {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .cm-item-grid {
+      display: grid;
+      grid-template-columns: 2.2fr 0.7fr 0.6fr 0.65fr 0.85fr 0.65fr 0.85fr auto;
+      gap: 6px;
+      align-items: end;
+    }
+
+    .cm-rec-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1.2fr 0.8fr auto;
+      gap: 8px;
+      align-items: end;
+    }
+
+    .toolbar-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--navy);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: all 0.2s ease;
+      z-index: 200;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 920px) {
+      .wrap {
+        grid-template-columns: 1fr;
+      }
+      .invoice-shell {
+        overflow: auto;
+      }
+      .invoice {
+        min-width: 650px;
+      }
+      .cm-item-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+      body {
+        background: #fff;
+      }
+      .top,
+      .main-nav-bar,
+      .panel,
+      .no-print {
+        display: none !important;
+      }
+      .app-view {
+        display: none !important;
+      }
+      .app-view.print-target {
+        display: block !important;
+      }
+      .wrap {
+        display: block;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+      }
+      .invoice-shell {
+        border: 0;
+        box-shadow: none;
+        padding: 0;
+      }
+      .invoice {
+        border: 1px solid #222;
+        min-height: 0;
+        padding: 15px 18px;
+        page-break-inside: avoid;
+      }
+    }
+
+    /* Refined workspace UI — print documents retain their original formatting. */
+    @media screen {
+      :root { --navy:#172c3b; --blue:#245c57; --orange:#e79a4f; --bg:#f5f6f3; --ink:#243330; --muted:#798681; --line:#e3e9e5; }
+      body { font-family: Inter, "Segoe UI", Arial, "Noto Sans Devanagari", sans-serif; background:var(--bg); }
+      .main-nav-bar { position:fixed; z-index:20; left:0; top:0; bottom:0; width:238px; padding:0 14px; overflow:visible; display:flex; flex-direction:column; align-items:stretch; gap:4px; background:#163a37; border:0; }
+      .sidebar-brand { display:flex; align-items:center; gap:11px; min-height:91px; padding:0 5px; border-bottom:1px solid rgba(255,255,255,.12); color:white; }
+      .brand-mark { width:38px; height:38px; display:grid; place-content:center; flex:none; background:#eaa254; color:#163a37; border-radius:10px; font-weight:900; font-size:17px; letter-spacing:-4px; padding-right:4px; transform:rotate(-3deg); }
+      .brand-mark span { color:#fff3df; }
+      .sidebar-brand strong { display:block; font-size:12px; letter-spacing:.045em; white-space:nowrap; }
+      .sidebar-brand small { display:block; margin-top:5px; color:#9bb5ac; font-size:9px; font-weight:700; letter-spacing:.13em; }
+      .nav-caption { padding:28px 12px 10px; font-size:10px; font-weight:800; color:#89a79e; letter-spacing:.14em; }
+      .main-nav-btn { min-height:44px; width:100%; padding:10px 12px; border:0; border-radius:8px; color:#b8cdc5; font-size:12.5px; font-weight:600; text-align:left; gap:11px; }
+      .main-nav-btn:hover { background:rgba(255,255,255,.07); }
+      .main-nav-btn.active { background:#305b53; color:white; box-shadow:inset 3px 0 #e9a459; }
+      .nav-icon { width:19px; text-align:center; font-size:19px; font-weight:400; line-height:1; color:#b5cfc4; }
+      .main-nav-btn .pill-badge { margin-left:auto; background:rgba(255,255,255,.11); color:#dce9e2; }
+      .sidebar-footer { margin-top:auto; margin-bottom:20px; padding:15px 10px; border-top:1px solid rgba(255,255,255,.12); display:flex; gap:10px; color:#dfece5; }
+      .footer-icon { display:grid; place-items:center; width:29px; height:29px; border-radius:8px; background:#305b53; color:#e9a459; flex:none; }
+      .sidebar-footer strong,.sidebar-footer span { display:block; font-size:10px; }
+      .sidebar-footer span { color:#93aea4; margin-top:4px; }
+      .top { margin-left:238px; height:76px; padding:0 32px; background:#fff; border-bottom:1px solid #e8eeea; color:var(--ink); flex-wrap:nowrap; }
+      .top-context { display:flex; align-items:center; gap:11px; min-width:180px; }
+      .context-icon { color:#397467; font-size:21px; }
+      .top-context strong,.top-context span:not(.context-icon) { display:block; }
+      .top-context strong { font-size:12px; }
+      .top-context div span { font-size:11px; color:#9aa6a0; margin-top:3px; }
+      .top-actions { justify-content:flex-end; gap:7px; }
+      .top-btn { background:#fff; border:1px solid #e0e8e3; color:#4b5d55; border-radius:8px; padding:9px 10px; font-size:11px; }
+      .top-btn:hover { background:#f2f6f3; }
+      .top-btn.orange-btn { background:#245c57; border-color:#245c57; color:#fff; }
+      .top-btn.orange-btn:hover { background:#193f3b; }
+      .top .pill-badge { background:#eaf2ed; color:#37675a; }
+      .app-view { margin-left:238px; }
+      .workspace-heading { max-width:1440px; margin:0 auto; padding:32px 34px 0; display:flex; justify-content:space-between; align-items:end; gap:15px; }
+      .eyebrow { color:#91a19a; font-size:9px; font-weight:800; letter-spacing:.14em; }
+      .eyebrow span { color:#c5d0c9; padding:0 7px; }
+      .workspace-heading h1 { color:#203e36; margin:10px 0 5px; font-size:27px; letter-spacing:-.035em; }
+      .workspace-heading p { margin:0; color:#84928a; font-size:12px; }
+      .heading-note { color:#72847a; font-size:11px; white-space:nowrap; }
+      .status-dot,.live-pill i { display:inline-block; width:7px; height:7px; border-radius:50%; background:#68a886; margin-right:5px; }
+      .wrap { max-width:1440px; margin:25px auto 0; padding:0 34px 40px; grid-template-columns:minmax(360px, 420px) minmax(0, 1fr); gap:20px; }
+      .panel { padding:22px; border:1px solid #e6ebe7; border-radius:12px; box-shadow:0 4px 20px rgba(34,67,52,.035); }
+      .editor-heading,.preview-heading { display:flex; align-items:flex-start; justify-content:space-between; }
+      .section-kicker { font-size:9px; color:#91a59a; letter-spacing:.13em; font-weight:800; }
+      .editor-heading h2,.preview-heading h2 { display:block; margin:7px 0 4px; color:#263f36; font-size:16px; letter-spacing:-.02em; }
+      .editor-heading p,.preview-heading p { color:#95a29b; font-size:11px; margin:0; }
+      .editor-icon,.preview-icon { display:grid; place-items:center; width:34px; height:34px; background:#edf5ef; color:#4b7f69; border-radius:9px; font-size:18px; }
+      .editor-heading { margin-bottom:20px; }
+      .panel-tabs { background:#f2f5f2; margin-bottom:22px; padding:4px; border-radius:8px; }
+      .panel-tab-btn { color:#829088; font-size:11px; padding:10px 4px; }
+      .panel-tab-btn.active { color:#275f50; box-shadow:0 2px 6px #1e42341a; }
+      .panel-section { border-color:#edf0ed; margin-bottom:20px; padding-bottom:20px; }
+      .panel h2 { font-size:14px; color:#2a4239; }
+      .sec-head h3 { font-size:13px; color:#2a4239; }
+      label { color:#586c61; font-size:11px; margin:12px 0 6px; }
+      input,select,textarea { border-color:#dce5de; border-radius:7px; padding:10px; color:#34493f; font-size:12px; background:#fff; }
+      input:focus,select:focus,textarea:focus { outline:2px solid #d7ebe0; border-color:#76a992; }
+      .contract-meta-strip { background:#f3f7f3; color:#678073; padding:10px; font-size:10.5px; }
+      .btn-chip,.btn-mini { background:#edf5ef; color:#3d775f; border-color:#d9eadd; }
+      .btn-link { color:#4e8069; }
+      .btn-soft { color:#6b7d72; background:white; border-color:#e1e9e2; font-size:10px; padding:7px 8px; }
+      .line-item-box,.recovery-row,.collapsible-details { background:#fafcf9; border-color:#e2eae3; }
+      .line-badge { background:#e8f2e9; color:#43715a; }
+      .primary { background:#245c57; } .primary:hover { background:#193f3b; }
+      .orange { background:#db9452; } .orange:hover { background:#c67e3c; }
+      .secondary { background:#eef3ee; color:#506c5a; }
+      .invoice-shell { padding:0; border-radius:12px; border:1px solid #e6ebe7; box-shadow:0 4px 20px rgba(34,67,52,.035); overflow:hidden; background:white; }
+      .preview-heading { padding:22px 24px; align-items:center; }
+      .live-pill { vertical-align:middle; font-size:9px; letter-spacing:.07em; color:#4a8f6b; background:#eaf5ed; padding:4px 7px; border-radius:20px; margin-left:7px; }
+      .live-pill i { width:6px; height:6px; margin-right:3px; }
+      .paper-stage { background:#edf1ed; border-top:1px solid #e6ebe7; padding:25px; overflow:auto; }
+      .invoice { min-width:600px; min-height:900px; box-shadow:0 5px 18px rgba(28,49,39,.09); }
+      .page-container { max-width:1440px; padding:0 34px 40px; margin:32px auto; }
+      .page-top-bar,.entity-card { border-color:#e5ebe6; border-radius:12px; box-shadow:0 4px 20px rgba(34,67,52,.035); }
+      .page-top-bar { padding:24px; margin-bottom:20px; }
+      .page-top-bar h2 { color:#234138; }
+      .page-top-bar p { line-height:1.6; }
+      .entity-card:hover { border-color:#a8cbbb; box-shadow:0 8px 24px rgba(34,67,52,.08); }
+      .modal { border-radius:14px; }
+      button:focus-visible,summary:focus-visible { outline:3px solid #e9a459; outline-offset:2px; }
+      @media(max-width:1200px) { .top-context div span { display:none; } .top-context { min-width:auto; } .top { padding:0 22px; } .top-btn { font-size:10px; padding:8px; } .wrap { grid-template-columns:minmax(340px,400px) minmax(0,1fr); padding-left:24px; padding-right:24px; } .workspace-heading { padding-left:24px; padding-right:24px; } }
+      @media(max-width:900px) { .main-nav-bar { position:relative; width:auto; height:auto; padding:10px 16px; flex-direction:row; overflow-x:auto; align-items:center; gap:5px; } .sidebar-brand { min-height:42px; border:0; padding:0 15px 0 0; margin-right:8px; border-right:1px solid rgba(255,255,255,.15); } .sidebar-brand strong { font-size:10px; } .sidebar-brand small { font-size:8px; } .brand-mark { width:32px; height:32px; } .nav-caption,.sidebar-footer { display:none; } .main-nav-btn { width:auto; min-height:40px; flex:none; } .top { margin-left:0; height:auto; min-height:64px; padding:12px 16px; } .app-view { margin-left:0; } .wrap { grid-template-columns:1fr; } .paper-stage { overflow:auto; } }
+      @media(max-width:600px) { .top { flex-wrap:wrap; gap:10px; } .top-actions { justify-content:flex-start; } .top-btn { padding:8px; } .workspace-heading { padding:25px 16px 0; } .workspace-heading h1 { font-size:23px; } .heading-note { display:none; } .wrap { margin-top:20px; padding:0 16px 30px; } .panel { padding:17px; } .paper-stage { padding:14px; } .page-container { padding:0 16px 30px; margin:20px auto; } .cards-grid { grid-template-columns:1fr; } .page-top-bar input,.page-top-bar select { max-width:100%; } .line-item-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); } .recovery-row { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    }
+
+    @media screen {
+      .account-area{display:flex;align-items:center;gap:10px;margin-left:auto;margin-right:14px;white-space:nowrap}.account-name{font-size:11px;font-weight:700;color:#536a5d}.account-logout{background:#f4f7f4;color:#63796a;padding:8px;font-size:10px}.sync-status{font-size:10px;color:#629275}.sync-status.error{color:#bd503b;font-weight:700}
+      .dashboard-wrap{max-width:1440px;margin:auto;padding:34px}.dash-breadcrumb{font-size:9px;color:#90a198;font-weight:800;letter-spacing:.14em}.dash-breadcrumb span{padding:0 7px;color:#c2d0c7}.dash-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin:30px 0 25px}.dash-overline{font-size:9px;letter-spacing:.14em;font-weight:800;color:#96a89e}.dash-head h1{font-size:29px;letter-spacing:-.04em;color:#213d33;margin:9px 0 7px}.wave{font-size:18px;color:#d99a58}.dash-head p,.dash-panel-head p{font-size:12px;color:#8b9b91;margin:0}.dash-primary{background:#255e51;color:white;padding:13px 17px;font-size:12px;border-radius:8px}.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.stat-card,.dash-panel{background:#fff;border:1px solid #e5ebe5;border-radius:12px;box-shadow:0 4px 20px rgba(34,67,52,.035)}.stat-card{padding:20px}.stat-top{display:flex;justify-content:space-between;align-items:center;font-size:9px;color:#82978a;letter-spacing:.1em;font-weight:800}.stat-top i,.quick-grid i{font-style:normal;display:grid;place-items:center;border-radius:9px;width:35px;height:35px;background:#eef6ef;color:#56846c;font-size:19px}.stat-card strong{display:block;color:#254438;font-size:29px;margin:10px 0 8px}.stat-card p{font-size:11px;color:#94a299;margin:0}.stat-card p span{float:right;color:#90b89d}.dash-columns{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;margin-top:18px}.dash-panel{padding:24px}.dash-panel-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.dash-panel-head h2{font-size:16px;color:#29473a;margin:8px 0 5px}.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}.quick-grid button{position:relative;text-align:left;background:#fafcf9;border:1px solid #e9eee9;padding:15px;border-radius:9px;color:#345447}.quick-grid button:hover{border-color:#a8cbbb;background:#f3f8f3}.quick-grid i{width:32px;height:32px;font-size:16px;margin-bottom:13px}.quick-grid strong,.quick-grid span{display:block}.quick-grid strong{font-size:12px}.quick-grid span{font-size:10px;color:#99a79e;margin-top:6px;font-weight:400}.quick-grid b{position:absolute;right:14px;top:14px;color:#a8bdb0}.text-action{background:transparent;color:#57856a;font-size:11px;white-space:nowrap}.recent-list{margin-top:19px}.recent-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #edf1ed}.recent-row:last-child{border:0}.recent-icon{display:grid;place-items:center;width:34px;height:34px;background:#f2f6f1;border-radius:8px;color:#648b70;flex:none}.recent-row strong,.recent-row small{display:block}.recent-row strong{font-size:11px;color:#365345}.recent-row small{font-size:10px;color:#9aa99f;margin-top:4px}.recent-row .recent-amount{margin-left:auto;font-size:11px;white-space:nowrap;color:#436352}.empty-state{text-align:center;margin:50px 0;color:#9aa99f;font-size:12px;line-height:1.8}.empty-state b{display:block;color:#526d5c;font-size:13px}.dash-tip{display:flex;align-items:center;gap:14px;margin-top:18px;padding:19px 22px;border-radius:12px;background:#e8f1e8;color:#345d48}.dash-tip>span{font-size:22px;color:#72a57f}.dash-tip strong{font-size:12px}.dash-tip p{margin:5px 0 0;font-size:11px;color:#829c89}.dash-tip button{margin-left:auto;color:#487c5a;background:transparent;font-size:11px;white-space:nowrap}
+      @media(max-width:1200px){.account-area{margin-right:4px}.account-name{display:none}.top{flex-wrap:wrap;height:auto;min-height:76px;padding-top:10px;padding-bottom:10px}.top-actions{margin-left:auto}}
+      @media(max-width:900px){.dashboard-wrap{padding:25px 20px}.stats-grid{grid-template-columns:repeat(2,1fr)}.dash-columns{grid-template-columns:1fr}}
+      @media(max-width:600px){.dash-head{align-items:flex-start;flex-direction:column}.dash-head h1{font-size:25px}.quick-grid{grid-template-columns:1fr}.stat-card{padding:15px}.dash-tip{align-items:flex-start;flex-wrap:wrap}.dash-tip button{margin-left:0}.account-area{margin-left:auto}.top-actions{margin-left:0}}
+    }
+
+    @media print { .paper-stage { padding:0 !important; border:0 !important; background:white !important; } }
+
+  </style>
+  <style>html.boot-wait body > *:not(#bootNotice){display:none!important}#bootNotice{display:none}html.boot-wait #bootNotice{display:block;max-width:540px;margin:12vh auto;padding:30px;font:15px/1.7 Arial,sans-serif;color:#29483b}#bootNotice a{color:#245c57}</style>
+</head>
+<body>
+  <div id="bootNotice" role="status">Connecting to your workspace…</div>
+  <!-- Top Header -->
+  <header class="top no-print">
+    <div class="top-context"><span class="context-icon">▦</span><div><strong>Workspace</strong><span>Manage your business in one place</span></div></div>
+    <div class="account-area"><span id="syncStatus" class="sync-status">● Connected</span><span class="account-name" id="accountName"></span><button type="button" class="account-logout" id="logoutButton">Sign out</button></div>
+    <div class="top-actions">
+      <button type="button" class="top-btn" id="btnQuickNewContract">+ New Contract</button>
+      <button type="button" class="top-btn" id="btnQuickNewEmployee">+ New Employee</button>
+      <button type="button" class="top-btn" id="btnOpenHistory">
+        <span>Invoice History</span>
+        <span class="pill-badge" id="historyCountBadge">0</span>
+      </button>
+      <button type="button" class="top-btn" id="btnBackupRestore">Backup / Restore</button>
+      <button type="button" class="top-btn orange-btn" id="btnTopPrint">Print / Save PDF</button>
+    </div>
+  </header>
+
+  <!-- Main Multi-Page Navigation Bar -->
+  <nav class="main-nav-bar no-print" role="navigation" aria-label="Main Modules">
+    <div class="sidebar-brand"><div class="brand-mark">S<span>S</span></div><div><strong>SS CONSTRUCTION</strong><small>BUSINESS WORKSPACE</small></div></div>
+    <div class="nav-caption">WORKSPACE</div>
+    <button type="button" class="main-nav-btn" data-main-view="dashboard"><span class="nav-icon">◫</span><span>Dashboard</span></button>
+    <button type="button" class="main-nav-btn active" data-main-view="invoice">
+      <span class="nav-icon">▤</span><span>Invoice Builder</span>
+    </button>
+    <button type="button" class="main-nav-btn" data-main-view="contracts">
+      <span class="nav-icon">▱</span><span>Contracts</span>
+      <span class="pill-badge" id="contractCountBadge">0</span>
+    </button>
+    <button type="button" class="main-nav-btn" data-main-view="employees">
+      <span class="nav-icon">♙</span><span>Employees</span>
+      <span class="pill-badge" id="employeeCountBadge">0</span>
+    </button>
+    <button type="button" class="main-nav-btn" data-main-view="payroll">
+      <span class="nav-icon">▦</span><span>Attendance &amp; Salary</span>
+    </button>
+    <button type="button" class="main-nav-btn" data-main-view="settings">
+      <span class="nav-icon">⚙</span><span>Firm Settings</span>
+    </button>
+    <div class="sidebar-footer"><div class="footer-icon">✦</div><div><strong>Built for your business</strong><span>All your essentials, together.</span></div></div>
+  </nav>
+
+  <div class="app-view no-print" id="view-dashboard">
+    <div class="dashboard-wrap">
+      <div class="dash-breadcrumb">WORKSPACE <span>/</span> OVERVIEW</div>
+      <div class="dash-head"><div><div class="dash-overline">YOUR BUSINESS, AT A GLANCE</div><h1>Welcome back, <span id="dashUser"></span> <span class="wave">✳</span></h1><p>Here’s what’s happening across your workspace.</p></div><button class="dash-primary" data-go="invoice">＋ &nbsp; Create invoice</button></div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-top"><span>SAVED INVOICES</span><i>▤</i></div><strong id="dashInvoices">0</strong><p>Your invoice history <span>↗</span></p></div>
+        <div class="stat-card"><div class="stat-top"><span>CONTRACTS</span><i>▱</i></div><strong id="dashContracts">0</strong><p>Contracts in workspace <span>↗</span></p></div>
+        <div class="stat-card"><div class="stat-top"><span>TEAM MEMBERS</span><i>♙</i></div><strong id="dashEmployees">0</strong><p>Employees &amp; drivers <span>↗</span></p></div>
+        <div class="stat-card"><div class="stat-top"><span>SALARY SLIPS</span><i>▦</i></div><strong id="dashSlips">0</strong><p>Saved salary records <span>↗</span></p></div>
+      </div>
+      <div class="dash-columns"><section class="dash-panel"><div class="dash-panel-head"><div><div class="dash-overline">QUICK ACCESS</div><h2>What would you like to do?</h2><p>Everything you need to keep work moving.</p></div></div><div class="quick-grid"><button data-go="invoice"><i>▤</i><strong>Create an invoice</strong><span>Prepare and print a tax invoice</span><b>↗</b></button><button data-go="contracts"><i>▱</i><strong>Manage contracts</strong><span>View contracts and assignments</span><b>↗</b></button><button data-go="employees"><i>♙</i><strong>View your team</strong><span>Manage employee details</span><b>↗</b></button><button data-go="payroll"><i>▦</i><strong>Attendance &amp; salary</strong><span>Prepare payroll documents</span><b>↗</b></button></div></section>
+      <section class="dash-panel recent"><div class="dash-panel-head"><div><div class="dash-overline">YOUR ACTIVITY</div><h2>Recent invoices</h2><p>Your latest saved documents.</p></div><button class="text-action" id="dashHistory">View all →</button></div><div id="dashRecent"></div></section></div>
+      <div class="dash-tip"><span>✦</span><div><strong>Keep your records safe</strong><p>Use Backup / Restore to export a copy of your workspace regularly.</p></div><button id="dashBackup">Backup / Restore →</button></div>
+    </div>
+  </div>
+
+  <!-- ==================== VIEW 1: INVOICE BUILDER ==================== -->
+  <div class="app-view active print-target" id="view-invoice">
+    <div class="workspace-heading no-print"><div><div class="eyebrow">WORKSPACE <span>/</span> INVOICES</div><h1>Invoice Builder</h1><p>Create, manage and print your invoices with ease.</p></div><div class="heading-note"><span class="status-dot"></span> Your workspace is ready</div></div>
+    <main class="wrap">
+      <!-- Left Editor Panel -->
+      <section class="panel no-print">
+        <div class="editor-heading"><div><span class="section-kicker">INVOICE DETAILS</span><h2>Build your invoice</h2><p>Fill in the details below to get started.</p></div><span class="editor-icon">✎</span></div>
+        <div class="panel-tabs" role="tablist">
+          <button type="button" class="panel-tab-btn active" id="tabBtnBuilder" data-tab="builder" role="tab" aria-selected="true">
+            📄 Invoice Builder
+          </button>
+          <button type="button" class="panel-tab-btn" id="tabBtnSettings" data-tab="settings" role="tab" aria-selected="false">
+            ⚙️ Settings (Firm Profile)
+          </button>
+        </div>
+
+        <!-- TAB PANE 1: INVOICE BUILDER -->
+        <div class="tab-pane active" id="tabPaneBuilder">
+          <div class="panel-section">
+            <h2>
+              <span>Invoice की जानकारी भरें</span>
+              <div>
+                <button type="button" class="btn-link" id="btnEditSelectedContract">Edit</button>
+                <button type="button" class="btn-chip" id="btnAddContractInline">+ Add</button>
+              </div>
+            </h2>
+
+            <label for="contractSelect">Contract Number चुनें</label>
+            <select id="contractSelect"></select>
+            <div class="contract-meta-strip" id="contractMetaStrip"></div>
+
+            <div class="grid2">
+              <div>
+                <label for="invoiceSNo">Invoice Serial No.</label>
+                <div class="input-with-btn">
+                  <input id="invoiceSNo" type="text" />
+                  <button type="button" class="btn-mini" id="btnNextSNo" title="Next Serial No.">+1</button>
+                </div>
+              </div>
+              <div>
+                <label for="invoiceDate">Invoice Date</label>
+                <input id="invoiceDate" type="date" />
+              </div>
+            </div>
+
+            <div class="grid2">
+              <div>
+                <label for="billPeriodFrom">Bill Period From</label>
+                <input id="billPeriodFrom" type="date" />
+              </div>
+              <div>
+                <label for="billPeriodTo">Bill Period To</label>
+                <input id="billPeriodTo" type="date" />
+              </div>
+            </div>
+
+            <div class="quick-period-bar">
+              <button type="button" class="btn-soft" id="btnNextCyclePeriod">Next Month &#8594;</button>
+              <button type="button" class="btn-soft" id="btnLastBilledPeriod">Last Billed Dates</button>
+              <button type="button" class="btn-soft" id="btnCurrentCalendarMonth">Full Calendar Month</button>
+            </div>
+
+            <!-- Vehicle No. & Running KM in Description (for MCL contracts) -->
+            <div class="grid2" id="descVehicleKmRow" style="display: none;">
+              <div>
+                <label for="descVehicleNo">Vehicle No. (in Description)</label>
+                <input type="text" id="descVehicleNo" />
+              </div>
+              <div>
+                <label for="descRunningKm">Running KM</label>
+                <input type="text" id="descRunningKm" />
+              </div>
+            </div>
+
+            <details class="collapsible-details">
+              <summary>Consignee / GSTN / W.O. No. बदलें (Optional)</summary>
+              <div class="details-body">
+                <label for="invConsignedTo">Consigned To</label>
+                <textarea id="invConsignedTo" rows="2"></textarea>
+                <div class="grid2">
+                  <div>
+                    <label for="invPurchaserGstn">GSTN (Purchaser)</label>
+                    <input type="text" id="invPurchaserGstn" />
+                  </div>
+                  <div>
+                    <label for="invContractNo">Contract No. &amp; Date</label>
+                    <input type="text" id="invContractNo" />
+                  </div>
+                </div>
+                <div class="grid3">
+                  <div>
+                    <label for="invWoNo">W.O. No.</label>
+                    <input type="text" id="invWoNo" />
+                  </div>
+                  <div>
+                    <label for="invVCode">V. Code</label>
+                    <input type="text" id="invVCode" />
+                  </div>
+                  <div>
+                    <label for="invContractPeriod">Contract Period</label>
+                    <input type="text" id="invContractPeriod" />
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <!-- 2. Line Items & Running KM -->
+          <div class="panel-section">
+            <div class="sec-head">
+              <h3>Services &amp; KM Charges</h3>
+              <button type="button" class="btn-chip" id="btnAddLineItem">+ Add Row</button>
+            </div>
+
+            <div class="km-split-bar" id="kmSplitBar" style="display: none;">
+              <div class="km-split-info">
+                Total KM (Cap: <span id="kmCapLabel">2500</span> KM):
+              </div>
+              <div class="km-split-controls">
+                <input type="number" id="quickTotalKmInput" min="0" step="1" />
+                <button type="button" class="btn-mini" id="btnApplyKmSplit">Auto-Split</button>
+              </div>
+            </div>
+
+            <div id="lineItemsContainer" class="line-items-list"></div>
+          </div>
+
+          <!-- 3. GST Settings -->
+          <div class="panel-section">
+            <div class="sec-head">
+              <h3>GST &amp; Calculation Mode</h3>
+            </div>
+            <div class="grid3">
+              <div>
+                <label for="taxMode">Tax Mode</label>
+                <select id="taxMode">
+                  <option value="inclusive">GST Inclusive</option>
+                  <option value="exclusive">GST Exclusive (+Tax)</option>
+                </select>
+              </div>
+              <div>
+                <label for="gstType">GST Type</label>
+                <select id="gstType">
+                  <option value="CGST_SGST">CGST + SGST</option>
+                  <option value="IGST">IGST</option>
+                </select>
+              </div>
+              <div>
+                <label for="gstRate">GST %</label>
+                <input type="number" id="gstRate" min="0" max="28" step="0.5" value="5" />
+              </div>
+            </div>
+
+            <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:10px;">
+              <label class="check-label">
+                <input type="checkbox" id="chkShowTotalGst" />
+                <span>Show "Total GST" Row</span>
+              </label>
+              <label class="check-label">
+                <input type="checkbox" id="chkShowSignatory" />
+                <span>Digital Signatory Stamp</span>
+              </label>
+            </div>
+
+            <details class="collapsible-details">
+              <summary>Manual Basic Cost / Round Off Override</summary>
+              <div class="details-body grid2">
+                <div>
+                  <label for="overrideBasicCost">Basic Cost Override</label>
+                  <input type="number" id="overrideBasicCost" step="0.01" />
+                </div>
+                <div>
+                  <label for="overrideRoundOff">Round Off Override</label>
+                  <input type="number" id="overrideRoundOff" step="1" />
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <!-- 4. Extra Recoveries -->
+          <div class="panel-section">
+            <div class="sec-head">
+              <label class="check-label">
+                <input type="checkbox" id="chkRecoveriesEnabled" />
+                <span>Extra Recoveries (IT / TDS / Bill Copy)</span>
+              </label>
+              <button type="button" class="btn-chip" id="btnAddRecovery">+ Add</button>
+            </div>
+            <div id="recoveriesSectionBody" style="display: none;">
+              <div id="recoveriesContainer" class="recoveries-list"></div>
+            </div>
+            <p class="hint" id="recoveriesDisabledHint" style="margin:4px 0 0;">
+              यदि इस बिल में 2% IT, 2% TDS-GST या Bill Copy कटौती दिखानी हो तो ऊपर टिक करें।
+            </p>
+          </div>
+
+          <!-- Action Buttons -->
+          <div>
+            <div class="btns">
+              <button type="button" class="primary" id="btnSaveOnly">Save Invoice</button>
+              <button type="button" class="orange" id="btnSaveAndPrint">Print / Save PDF</button>
+              <button type="button" class="secondary" id="btnResetInvoice">Reset</button>
+            </div>
+            <p class="hint">
+              अपना कॉन्ट्रैक्ट जोड़ें और बिल की तारीख, अवधि, KM और रकम भरें। Print पर जाकर “Save as PDF” चुनें।
+            </p>
+          </div>
+        </div>
+
+        <!-- TAB PANE 2: SETTINGS (FIRM PROFILE) -->
+        <div class="tab-pane" id="tabPaneSettings">
+          <div class="panel-section">
+            <h2>
+              <span>Firm Profile &amp; Bank Settings</span>
+              <button type="button" class="btn-link" id="btnBackToBuilder">&#8592; Back to Invoice</button>
+            </h2>
+            <p class="hint" style="margin-top:0; margin-bottom:10px;">
+              यहाँ अपनी फर्म का नाम, प्रोप्राइटर, पता, मोबाइल, GSTN और बैंक खाते की जानकारी बदलें। कोई भी बदलाव तुरंत दाईं तरफ Invoice में दिखेगा।
+            </p>
+
+            <div class="sec-head">
+              <h3>1. Firm &amp; Proprietor Details</h3>
+            </div>
+            <div>
+              <label for="stEnglishName">Firm Name (English)</label>
+              <input type="text" id="stEnglishName" />
+            </div>
+            <div class="grid2">
+              <div>
+                <label for="stProprietorEn">Proprietor Name</label>
+                <input type="text" id="stProprietorEn" />
+              </div>
+              <div>
+                <label for="stMsme">MSME / UDYAM No.</label>
+                <input type="text" id="stMsme" />
+              </div>
+            </div>
+            <div class="grid2">
+              <div>
+                <label for="stPhone">Mobile Number</label>
+                <input type="text" id="stPhone" />
+              </div>
+              <div>
+                <label for="stEmailEn">Email ID</label>
+                <input type="text" id="stEmailEn" />
+              </div>
+            </div>
+            <div>
+              <label for="stAddr1">Address Line 1</label>
+              <input type="text" id="stAddr1" />
+            </div>
+            <div class="grid2">
+              <div>
+                <label for="stAddr2">Address Line 2 (City / PIN)</label>
+                <input type="text" id="stAddr2" />
+              </div>
+              <div>
+                <label for="stState">Seller State &amp; Code</label>
+                <input type="text" id="stState" />
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-section">
+            <div class="sec-head">
+              <h3>2. Bank Account &amp; Tax Details</h3>
+            </div>
+            <div class="grid2">
+              <div>
+                <label for="stAccName">Account Holder Name</label>
+                <input type="text" id="stAccName" />
+              </div>
+              <div>
+                <label for="stBankName">Bank Name</label>
+                <input type="text" id="stBankName" />
+              </div>
+            </div>
+            <div class="grid2">
+              <div>
+                <label for="stAccNo">Account Number</label>
+                <input type="text" id="stAccNo" />
+              </div>
+              <div>
+                <label for="stIfsc">IFSC Code</label>
+                <input type="text" id="stIfsc" />
+              </div>
+            </div>
+            <div class="grid2">
+              <div>
+                <label for="stPan">PAN Number</label>
+                <input type="text" id="stPan" />
+              </div>
+              <div>
+                <label for="stGstn">Firm GSTN</label>
+                <input type="text" id="stGstn" />
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-section">
+            <div class="sec-head">
+              <h3>3. Invoice Numbering Counter</h3>
+            </div>
+            <div class="grid2">
+              <div>
+                <label for="stFySuffix">Financial Year Suffix</label>
+                <input type="text" id="stFySuffix" />
+              </div>
+              <div>
+                <label for="stLastSerial">Last Serial Number Used</label>
+                <input type="number" id="stLastSerial" min="0" />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="btns">
+              <button type="button" class="primary" id="btnSaveFirmTab">Save Firm Profile</button>
+              <button type="button" class="secondary" id="btnResetFirmTab">Reset Default Profile</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Invoice Preview Area -->
+      <section class="invoice-shell">
+        <div class="preview-heading no-print"><div><span class="section-kicker">DOCUMENT PREVIEW</span><h2>Live preview <span class="live-pill"><i></i> LIVE</span></h2><p>Your changes will appear here automatically.</p></div><span class="preview-icon">▧</span></div>
+        <div class="paper-stage"><div class="invoice" id="invoicePaper"></div></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ==================== VIEW 2: CONTRACTS & STAFF ASSIGNMENT PAGE ==================== -->
+  <div class="app-view no-print" id="view-contracts">
+    <div class="page-container">
+      <div class="page-top-bar">
+        <div>
+          <h2>📋 Contracts &amp; Employee Assignment</h2>
+          <p>सभी कॉन्ट्रैक्ट्स यहाँ देखें, नए कॉन्ट्रैक्ट जोड़ें और प्रत्येक कॉन्ट्रैक्ट/गाड़ी पर ड्राइवर या कर्मचारी नियुक्त (Assign) करें।</p>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+          <input type="search" id="pageContractsSearch" style="width:260px;" />
+          <button type="button" class="primary" id="btnPageAddContract">+ Add New Contract</button>
+        </div>
+      </div>
+      <div id="contractsPageGrid" class="cards-grid"></div>
+    </div>
+  </div>
+
+  <!-- ==================== VIEW 3: EMPLOYEES DIRECTORY PAGE ==================== -->
+  <div class="app-view no-print" id="view-employees">
+    <div class="page-container">
+      <div class="page-top-bar">
+        <div>
+          <h2>👷 Employees &amp; Drivers Directory</h2>
+          <p>ड्राइवर, हेल्पर और स्टाफ की जानकारी, वेतन (Basic Salary), बैंक खाता और उनका असाइन किया गया कॉन्ट्रैक्ट मैनेज करें।</p>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+          <select id="empFilterContract" style="width:220px;">
+            <option value="">All Contracts</option>
+          </select>
+          <input type="search" id="pageEmployeesSearch" style="width:230px;" />
+          <button type="button" class="primary" id="btnPageAddEmployee">+ Add New Employee</button>
+        </div>
+      </div>
+      <div id="employeesPageGrid" class="cards-grid"></div>
+    </div>
+  </div>
+
+  <!-- ==================== VIEW 4: ATTENDANCE & SALARY SLIP STUDIO ==================== -->
+  <div class="app-view" id="view-payroll">
+    <div class="workspace-heading no-print"><div><div class="eyebrow">WORKSPACE <span>/</span> PAYROLL</div><h1>Attendance &amp; Salary</h1><p>Manage attendance and prepare salary documents.</p></div><div class="heading-note"><span class="status-dot"></span> Your workspace is ready</div></div>
+    <div class="wrap">
+      <!-- Left Attendance & Salary Controls -->
+      <section class="panel no-print">
+        <div class="panel-section">
+          <div class="sec-head">
+            <h2>1. Select Month &amp; Employee</h2>
+            <button type="button" class="btn-chip" id="btnOpenSalaryHistory">Saved Slips (<span id="salaryHistCount">0</span>)</button>
+          </div>
+
+          <div class="grid2">
+            <div>
+              <label for="payMonthInput">Salary Month (माह)</label>
+              <input type="month" id="payMonthInput" value="2026-10" />
+            </div>
+            <div>
+              <label for="payDocMode">Preview Document Mode</label>
+              <select id="payDocMode">
+                <option value="slip">Salary Slip + Attendance Sheet</option>
+                <option value="muster">Monthly Attendance Muster Roll</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="payContractFilter">Filter by Contract (कॉन्ट्रैक्ट के अनुसार)</label>
+          <select id="payContractFilter">
+            <option value="">All Contracts (सभी कॉन्ट्रैक्ट्स)</option>
+          </select>
+
+          <div class="sec-head" style="margin-top:10px; margin-bottom:2px;">
+            <label for="payEmployeeSelect" style="margin:0;">Select Employee (कर्मचारी चुनें)</label>
+            <button type="button" class="btn-link" id="btnEditCurrentEmp">Edit Employee</button>
+          </div>
+          <select id="payEmployeeSelect"></select>
+        </div>
+
+        <!-- 2. Interactive Attendance Sheet (Day 1 to 31) -->
+        <div class="panel-section">
+          <div class="sec-head">
+            <h2>2. Monthly Attendance Sheet</h2>
+            <span style="font-size:11px; color:var(--muted);">Click date to toggle: P → A → HD → WO</span>
+          </div>
+
+          <div class="quick-period-bar" style="margin-top:0; margin-bottom:8px;">
+            <button type="button" class="btn-soft" id="btnAttAllPresent">Mark All Present (P)</button>
+            <button type="button" class="btn-soft" id="btnAttSundaysWo">Sundays = WO</button>
+            <button type="button" class="btn-soft" id="btnAttResetMonth">Reset Default</button>
+          </div>
+
+          <div id="attCalendarGrid" class="att-calendar-grid"></div>
+
+          <div class="att-summary-pills" id="attSummaryPills"></div>
+        </div>
+
+        <!-- 3. Salary & Deductions Adjustments -->
+        <div class="panel-section">
+          <div class="sec-head">
+            <h2>3. Salary, Overtime &amp; Deductions</h2>
+          </div>
+
+          <div class="grid3">
+            <div>
+              <label for="payBasicSalary">Monthly Basic (₹)</label>
+              <input type="number" id="payBasicSalary" step="100" />
+            </div>
+            <div>
+              <label for="payAllowance">Bhatta / Allowance (₹)</label>
+              <input type="number" id="payAllowance" step="50" />
+            </div>
+            <div>
+              <label for="payOtHours">Overtime Hours / Days</label>
+              <input type="number" id="payOtHours" step="1" min="0" />
+            </div>
+          </div>
+
+          <div class="grid3">
+            <div>
+              <label for="payOtRate">OT Rate (₹/unit)</label>
+              <input type="number" id="payOtRate" step="10" />
+            </div>
+            <div>
+              <label for="payBonus">Incentive / Bonus (₹)</label>
+              <input type="number" id="payBonus" step="100" value="0" />
+            </div>
+            <div>
+              <label for="payAdvanceDed">Advance Deduction (₹)</label>
+              <input type="number" id="payAdvanceDed" step="100" value="0" />
+            </div>
+          </div>
+
+          <div class="grid3">
+            <div>
+              <label for="payPfDed">PF / ESIC Deduction (₹)</label>
+              <input type="number" id="payPfDed" step="50" value="0" />
+            </div>
+            <div>
+              <label for="payOtherDed">Other Deduction (₹)</label>
+              <input type="number" id="payOtherDed" step="50" value="0" />
+            </div>
+            <div>
+              <label for="payPaymentMode">Payment Mode</label>
+              <select id="payPaymentMode">
+                <option value="Bank Transfer (NEFT/IMPS)">Bank Transfer</option>
+                <option value="UPI / Online">UPI / Online</option>
+                <option value="Cash">Cash</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid2">
+            <div>
+              <label for="paySlipDate">Salary Slip Date</label>
+              <input type="date" id="paySlipDate" />
+            </div>
+            <div>
+              <label for="payRemarks">Remarks / Note</label>
+              <input type="text" id="payRemarks" />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="btns">
+            <button type="button" class="primary" id="btnSaveSalarySlip">Save Salary Slip</button>
+            <button type="button" class="orange" id="btnPrintSalarySlip">Print / Save PDF</button>
+          </div>
+          <p class="hint">
+            टिप: "Preview Document Mode" से आप व्यक्तिगत <b>Salary Slip + Attendance Calendar</b> या पूरे स्टाफ का <b>Monthly Attendance Muster Roll</b> प्रिंट कर सकते हैं।
+          </p>
+        </div>
+      </section>
+
+      <!-- Right Printable Salary Slip / Attendance Sheet Preview -->
+      <section class="invoice-shell">
+        <div class="preview-heading no-print"><div><span class="section-kicker">DOCUMENT PREVIEW</span><h2>Live preview <span class="live-pill"><i></i> LIVE</span></h2><p>Your changes will appear here automatically.</p></div><span class="preview-icon">▧</span></div>
+        <div class="paper-stage"><div class="invoice" id="payrollPaper"></div></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast no-print"></div>
+
+  <!-- MODAL 1: Add / Edit Contract -->
+  <div class="modal-backdrop no-print" id="contractModal" aria-hidden="true">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3 id="contractModalTitle">Add New Contract</h3>
+        <button type="button" class="modal-close" data-close="contractModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="cmId" />
+        <div class="grid2">
+          <div>
+            <label for="cmShortLabel">Short Display Name (Dropdown) *</label>
+            <input type="text" id="cmShortLabel" />
+          </div>
+          <div>
+            <label for="cmContractNo">Contract No. *</label>
+            <input type="text" id="cmContractNo" />
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div>
+            <label for="cmContractDate">Contract Date</label>
+            <input type="text" id="cmContractDate" />
+          </div>
+          <div>
+            <label for="cmDateLabel">Date Prefix</label>
+            <select id="cmDateLabel">
+              <option value="Dt.">Dt.</option>
+              <option value="Dated">Dated</option>
+            </select>
+          </div>
+          <div>
+            <label for="cmPurchaserGstn">Purchaser GSTN *</label>
+            <input type="text" id="cmPurchaserGstn" />
+          </div>
+        </div>
+
+        <div>
+          <label for="cmConsignedTo">Consigned To (Name &amp; Address) *</label>
+          <textarea id="cmConsignedTo" rows="2"></textarea>
+        </div>
+
+        <div class="grid3">
+          <div>
+            <label for="cmWoNo">W.O. No. (Optional)</label>
+            <input type="text" id="cmWoNo" />
+          </div>
+          <div>
+            <label for="cmVCode">V. Code (Optional)</label>
+            <input type="text" id="cmVCode" />
+          </div>
+          <div>
+            <label for="cmContractPeriod">Contract Period (Optional)</label>
+            <input type="text" id="cmContractPeriod" />
+          </div>
+        </div>
+
+        <div class="grid4">
+          <div>
+            <label for="cmVehicleNo">Vehicle No. (Optional)</label>
+            <input type="text" id="cmVehicleNo" />
+          </div>
+          <div>
+            <label for="cmGstType">GST Type</label>
+            <select id="cmGstType">
+              <option value="CGST_SGST">CGST + SGST</option>
+              <option value="IGST">IGST</option>
+            </select>
+          </div>
+          <div>
+            <label for="cmGstRate">GST %</label>
+            <input type="number" id="cmGstRate" value="5" min="0" max="28" step="0.5" />
+          </div>
+          <div>
+            <label for="cmTaxMode">Tax Mode</label>
+            <select id="cmTaxMode">
+              <option value="inclusive">Inclusive</option>
+              <option value="exclusive">Exclusive</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid2" style="margin-top:8px;">
+          <div>
+            <label for="cmKmCap">Monthly KM Cap (for Auto-Split, 0 if none)</label>
+            <input type="number" id="cmKmCap" value="0" min="0" />
+          </div>
+          <div style="display:flex; flex-direction:column; justify-content:end; gap:6px; padding-bottom:4px;">
+            <label class="check-label">
+              <input type="checkbox" id="cmShowVehicleInDesc" />
+              <span>Show Vehicle No. &amp; Running KM in Item 1 (MCL style)</span>
+            </label>
+            <label class="check-label">
+              <input type="checkbox" id="cmShowTotalGst" />
+              <span>Show "Total GST" Row</span>
+            </label>
+            <label class="check-label">
+              <input type="checkbox" id="cmShowSignatory" />
+              <span>Show Digital Signatory Block</span>
+            </label>
+          </div>
+        </div>
+
+        <hr class="divider" />
+
+        <div class="sec-head">
+          <h4 style="margin:0;">Assign Employees / Drivers to this Contract</h4>
+          <span style="font-size:11px; color:var(--muted);">Tick employees working on this contract</span>
+        </div>
+        <div id="cmEmployeeAssignList" class="emp-assign-checklist"></div>
+
+        <hr class="divider" />
+
+        <div class="sec-head">
+          <h4 style="margin:0;">Default Service Line Items</h4>
+          <button type="button" class="btn-chip" id="cmAddItemBtn">+ Add Line Item</button>
+        </div>
+        <div id="cmItemsContainer" class="cm-list"></div>
+
+        <hr class="divider" />
+
+        <div class="sec-head">
+          <label class="check-label">
+            <input type="checkbox" id="cmRecoveriesEnabled" />
+            <span>Enable Default Extra Recoveries</span>
+          </label>
+          <button type="button" class="btn-chip" id="cmAddRecoveryBtn">+ Add Recovery</button>
+        </div>
+        <div id="cmRecoveriesContainer" class="cm-list"></div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-danger-outline" id="cmDeleteBtn" style="margin-right:auto; display:none;">Delete Contract</button>
+        <button type="button" class="secondary" data-close="contractModal">Cancel</button>
+        <button type="button" class="primary" id="cmSaveBtn">Save Contract</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: Contracts Directory -->
+  <div class="modal-backdrop no-print" id="contractsListModal" aria-hidden="true">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3>Saved Contracts Directory</h3>
+        <button type="button" class="modal-close" data-close="contractsListModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="toolbar-row">
+          <input type="search" id="contractsSearchInput" />
+          <button type="button" class="primary" id="btnNewContractFromDir">+ New Contract</button>
+        </div>
+        <div id="contractsDirectoryBody" class="directory-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: Saved Invoice History -->
+  <div class="modal-backdrop no-print" id="historyModal" aria-hidden="true">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3>Saved Invoice History</h3>
+        <button type="button" class="modal-close" data-close="historyModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="toolbar-row">
+          <input type="search" id="historySearchInput" />
+          <span id="historySummaryPill" style="font-weight:700; font-size:12px; white-space:nowrap; color:var(--navy);">0 Invoices</span>
+        </div>
+        <div id="historyListBody" class="directory-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 4: Firm & Bank Profile -->
+  <div class="modal-backdrop no-print" id="companyModal" aria-hidden="true">
+    <div class="modal modal-md">
+      <div class="modal-header">
+        <h3>Firm &amp; Bank Account Settings</h3>
+        <button type="button" class="modal-close" data-close="companyModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="grid2">
+          <div>
+            <label for="coEnglishName">Firm Name</label>
+            <input type="text" id="coEnglishName" />
+          </div>
+          <div>
+            <label for="coProprietorEn">Proprietor</label>
+            <input type="text" id="coProprietorEn" />
+          </div>
+        </div>
+        <div class="grid3">
+          <div>
+            <label for="coMsme">MSME No.</label>
+            <input type="text" id="coMsme" />
+          </div>
+          <div>
+            <label for="coPhone">Mobile Number</label>
+            <input type="text" id="coPhone" />
+          </div>
+          <div>
+            <label for="coEmailEn">Email</label>
+            <input type="text" id="coEmailEn" />
+          </div>
+        </div>
+        <div class="grid2">
+          <div>
+            <label for="coAddr1">Address Line 1</label>
+            <input type="text" id="coAddr1" />
+          </div>
+          <div>
+            <label for="coAddr2">Address Line 2</label>
+            <input type="text" id="coAddr2" />
+          </div>
+        </div>
+        <hr class="divider" />
+        <div class="grid3">
+          <div>
+            <label for="coAccName">Bank Account Name</label>
+            <input type="text" id="coAccName" />
+          </div>
+          <div>
+            <label for="coAccNo">Account Number</label>
+            <input type="text" id="coAccNo" />
+          </div>
+          <div>
+            <label for="coBankName">Bank Name</label>
+            <input type="text" id="coBankName" />
+          </div>
+        </div>
+        <div class="grid3">
+          <div>
+            <label for="coIfsc">IFSC Code</label>
+            <input type="text" id="coIfsc" />
+          </div>
+          <div>
+            <label for="coPan">PAN</label>
+            <input type="text" id="coPan" />
+          </div>
+          <div>
+            <label for="coGstn">Firm GSTN</label>
+            <input type="text" id="coGstn" />
+          </div>
+        </div>
+        <div class="grid3">
+          <div>
+            <label for="coState">Seller State</label>
+            <input type="text" id="coState" />
+          </div>
+          <div>
+            <label for="coFySuffix">Financial Year Suffix</label>
+            <input type="text" id="coFySuffix" />
+          </div>
+          <div>
+            <label for="coLastSerial">Last S. No. Counter</label>
+            <input type="number" id="coLastSerial" min="0" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="secondary" data-close="companyModal">Cancel</button>
+        <button type="button" class="primary" id="btnSaveCompany">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 5: Backup & Restore -->
+  <div class="modal-backdrop no-print" id="backupModal" aria-hidden="true">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h3>Backup &amp; Restore Data</h3>
+        <button type="button" class="modal-close" data-close="backupModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:13px; color:#475569; line-height:1.5; margin-top:0;">
+          आपके सभी कॉन्ट्रैक्ट्स, कर्मचारी, अटेंडेंस, सैलरी स्लिप और बिल हिस्ट्री आपके ब्राउज़र में सुरक्षित रहते हैं। आप कभी भी JSON बैकअप डाउनलोड या रीस्टोर कर सकते हैं।
+        </p>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <button type="button" class="primary" id="btnExportBackup">Download Backup (.json)</button>
+          <label class="secondary" style="text-align:center; padding:10px; border-radius:7px; cursor:pointer; margin:0;">
+            <span>Restore from Backup (.json)</span>
+            <input type="file" id="inputImportBackup" accept=".json,application/json" hidden />
+          </label>
+          <hr class="divider" />
+          <button type="button" class="btn-danger-outline" id="btnFactoryReset">Reset Defaults</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 6: Custom Confirmation Dialog -->
+  <div class="modal-backdrop no-print" id="confirmDialogModal" aria-hidden="true">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h3 id="confirmDialogTitle">Confirm Action</h3>
+        <button type="button" class="modal-close" id="confirmDialogCloseBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="confirmDialogMessage" style="margin:0; font-size:13.5px; color:#334155; line-height:1.5;"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="secondary" id="confirmDialogCancelBtn">Cancel</button>
+        <button type="button" class="primary" id="confirmDialogOkBtn" style="background: var(--danger);">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 7: Add / Edit Employee -->
+  <div class="modal-backdrop no-print" id="employeeModal" aria-hidden="true">
+    <div class="modal modal-md">
+      <div class="modal-header">
+        <h3 id="employeeModalTitle">Add New Employee</h3>
+        <button type="button" class="modal-close" data-close="employeeModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="emId" />
+        <div class="grid3">
+          <div>
+            <label for="emCode">Employee Code *</label>
+            <input type="text" id="emCode" />
+          </div>
+          <div>
+            <label for="emName">Full Name (कर्मचारी का नाम) *</label>
+            <input type="text" id="emName" />
+          </div>
+          <div>
+            <label for="emRole">Designation / Role *</label>
+            <select id="emRole">
+              <option value="Heavy Truck Driver">Heavy Truck Driver</option>
+              <option value="Explosive Van Driver">Explosive Van Driver</option>
+              <option value="SUV / Taxi Driver">SUV / Taxi Driver</option>
+              <option value="Camper / MUV Driver">Camper / MUV Driver</option>
+              <option value="Helper / Khalasi">Helper / Khalasi</option>
+              <option value="Site Supervisor">Site Supervisor</option>
+              <option value="Office / Billing Staff">Office / Billing Staff</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div>
+            <label for="emPhone">Mobile Number</label>
+            <input type="text" id="emPhone" />
+          </div>
+          <div>
+            <label for="emLicense">DL / Aadhaar / PAN No.</label>
+            <input type="text" id="emLicense" />
+          </div>
+          <div>
+            <label for="emJoiningDate">Joining Date</label>
+            <input type="date" id="emJoiningDate" />
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div>
+            <label for="emContractId">Assigned Contract (किस कॉन्ट्रैक्ट पर कार्यरत हैं)</label>
+            <select id="emContractId">
+              <option value="">-- Unassigned / Floater --</option>
+            </select>
+          </div>
+          <div>
+            <label for="emVehicleNo">Assigned Vehicle No. (गाड़ी नंबर)</label>
+            <input type="text" id="emVehicleNo" />
+          </div>
+        </div>
+
+        <hr class="divider" />
+        <h4 style="margin:0 0 6px; color:var(--navy);">Salary &amp; Bank Details (वेतन और बैंक विवरण)</h4>
+
+        <div class="grid4">
+          <div>
+            <label for="emBasicSalary">Monthly Basic Salary (₹) *</label>
+            <input type="number" id="emBasicSalary" value="18000" step="500" />
+          </div>
+          <div>
+            <label for="emAllowance">Monthly Bhatta / Allowance (₹)</label>
+            <input type="number" id="emAllowance" value="2000" step="100" />
+          </div>
+          <div>
+            <label for="emOtRate">OT Rate (₹/Hr or Trip)</label>
+            <input type="number" id="emOtRate" value="100" step="10" />
+          </div>
+          <div>
+            <label for="emPfDefault">Default PF/ESIC Ded. (₹)</label>
+            <input type="number" id="emPfDefault" value="0" step="50" />
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div>
+            <label for="emBankName">Bank Name</label>
+            <input type="text" id="emBankName" />
+          </div>
+          <div>
+            <label for="emAccountNo">Bank Account No.</label>
+            <input type="text" id="emAccountNo" />
+          </div>
+          <div>
+            <label for="emIfsc">IFSC Code</label>
+            <input type="text" id="emIfsc" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-danger-outline" id="emDeleteBtn" style="margin-right:auto; display:none;">Delete Employee</button>
+        <button type="button" class="secondary" data-close="employeeModal">Cancel</button>
+        <button type="button" class="primary" id="emSaveBtn">Save Employee</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 8: Saved Salary Slips History -->
+  <div class="modal-backdrop no-print" id="salaryHistoryModal" aria-hidden="true">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3>Saved Salary Slips History</h3>
+        <button type="button" class="modal-close" data-close="salaryHistoryModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="salaryHistoryListBody" class="directory-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="defaults.js"></script>
+  <script src="config.js"></script>
+  <script src="supabase.min.js"></script>
+  <script src="boot.js"></script>
+
+  <!-- app.js loads only after authentication and authorization. -->
+</body>
+</html>
